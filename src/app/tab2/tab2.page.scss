@@ -1,0 +1,17 @@
+.list-heading { align-items: flex-start; display: flex; justify-content: space-between; padding-top: 20px; }
+.eyebrow { color: var(--ion-color-primary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12rem; margin: 0 0 6px; }
+h1 { color: #321b2c; font-size: 1.8rem; margin: 0; }
+.list-heading p:not(.eyebrow) { color: #8b7181; margin: 6px 0 0; }
+ion-badge { border-radius: 12px; padding: 7px 10px; }
+ion-searchbar { --background: #fff8fb; --border-radius: 14px; --box-shadow: none; padding-top: 12px; }
+ion-segment { --background: #fff0f6; margin: 4px 12px 12px; }
+.patient-list { background: transparent; padding: 0 12px; }
+.patient-item { --background: #fff8fb; --border-radius: 16px; --inner-padding-end: 6px; border: 1px solid #f5dce8; border-radius: 16px; margin-bottom: 10px; }
+.patient-item h2 { color: #321b2c; font-weight: 750; }
+.patient-item p { color: #8b7181; }
+ion-avatar { align-items: center; background: #f9c3db; color: #87234f; display: flex; font-weight: 800; height: 44px; justify-content: center; width: 44px; }
+ion-chip { font-size: 0.7rem; margin: 7px 0 0; }
+.empty-state { color: #8b7181; padding: 64px 24px; text-align: center; }
+.empty-state ion-icon { color: #e487ae; font-size: 52px; }
+.empty-state h2 { color: #321b2c; margin-bottom: 6px; }
+.edit-form { display: grid; gap: 18px; }

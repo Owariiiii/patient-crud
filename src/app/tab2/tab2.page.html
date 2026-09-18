@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Patients</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content pullingText="Pull to refresh"></ion-refresher-content>
+  </ion-refresher>
+
+  <section class="list-heading ion-padding-horizontal">
+    <div>
+      <p class="eyebrow">CARE DIRECTORY</p>
+      <h1>Patient list</h1>
+      <p>{{ patients.length }} total records</p>
+    </div>
+    <ion-badge color="primary">Live</ion-badge>
+  </section>
+
+  <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search name, email, or notes" animated="true"></ion-searchbar>
+  <ion-segment [(ngModel)]="selectedStatus" scrollable>
+    <ion-segment-button value="All"><ion-label>All</ion-label></ion-segment-button>
+    <ion-segment-button value="Active"><ion-label>Active</ion-label></ion-segment-button>
+    <ion-segment-button value="Follow-up"><ion-label>Follow-up</ion-label></ion-segment-button>
+    <ion-segment-button value="Discharged"><ion-label>Discharged</ion-label></ion-segment-button>
+  </ion-segment>
+
+  <ion-list class="patient-list" lines="none">
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="reorderPatients($event)">
+      <ion-item-sliding *ngFor="let patient of filteredPatients">
+        <ion-item class="patient-item">
+          <ion-avatar slot="start"><span>{{ patient.name.charAt(0) }}</span></ion-avatar>
+          <ion-label>
+            <h2>{{ patient.name }}</h2>
+            <p>{{ patient.email }} · {{ patient.age }} yrs · {{ patient.gender }}</p>
+            <ion-chip [color]="patient.status === 'Active' ? 'success' : patient.status === 'Follow-up' ? 'warning' : 'medium'">
+              <ion-label>{{ patient.status }}</ion-label>
+            </ion-chip>
+          </ion-label>
+          <ion-button fill="clear" slot="end" (click)="openEditModal(patient)"><ion-icon slot="icon-only" name="create-outline"></ion-icon></ion-button>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="start">
+          <ion-item-option color="danger" (click)="deletePatient(patient)"><ion-icon slot="icon-only" name="trash-outline"></ion-icon></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  </ion-list>
+
+  <div class="empty-state" *ngIf="!filteredPatients.length">
+    <ion-icon name="people-outline"></ion-icon>
+    <h2>No patients found</h2>
+    <p>Add a patient or try a different search.</p>
+  </div>
+
+  <ion-modal [isOpen]="isEditModalOpen" (didDismiss)="closeEditModal()">
+    <ng-template>
+      <ion-header><ion-toolbar><ion-title>Edit patient</ion-title><ion-buttons slot="end"><ion-button (click)="closeEditModal()">Close</ion-button></ion-buttons></ion-toolbar></ion-header>
+      <ion-content class="ion-padding edit-form">
+        <ion-input label="Full name" labelPlacement="stacked" [(ngModel)]="editingPatient.name"></ion-input>
+        <ion-input type="email" label="Email" labelPlacement="stacked" [(ngModel)]="editingPatient.email"></ion-input>
+        <ion-input type="number" label="Age" labelPlacement="stacked" [(ngModel)]="editingPatient.age"></ion-input>
+        <ion-select label="Gender" labelPlacement="stacked" [(ngModel)]="editingPatient.gender"><ion-select-option value="Female">Female</ion-select-option><ion-select-option value="Male">Male</ion-select-option><ion-select-option value="Other">Other</ion-select-option></ion-select>
+        <ion-select label="Care status" labelPlacement="stacked" [(ngModel)]="editingPatient.status"><ion-select-option value="Active">Active</ion-select-option><ion-select-option value="Follow-up">Follow-up</ion-select-option><ion-select-option value="Discharged">Discharged</ion-select-option></ion-select>
+        <ion-textarea label="Notes" labelPlacement="stacked" autoGrow="true" [(ngModel)]="editingPatient.notes"></ion-textarea>
+        <ion-button expand="block" (click)="saveEdit()" [disabled]="isLoading">Save changes</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
