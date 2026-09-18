@@ -1,0 +1,55 @@
+.intro {
+	padding: 18px 4px 22px;
+}
+
+.eyebrow {
+	color: var(--ion-color-primary);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.12rem;
+	margin: 0 0 8px;
+}
+
+h1 {
+	color: #321b2c;
+	font-size: 2rem;
+	margin: 0;
+}
+
+.subtitle {
+	color: #7c6473;
+	margin: 8px 0 0;
+}
+
+.patient-form {
+	display: grid;
+	gap: 12px;
+}
+
+ion-item {
+	--background: #fff8fb;
+	--border-radius: 16px;
+	--padding-start: 16px;
+	--inner-padding-end: 12px;
+	border: 1px solid #f5dce8;
+	border-radius: 16px;
+}
+
+ion-item ion-icon { color: var(--ion-color-primary); }
+
+.field-row {
+	display: grid;
+	gap: 12px;
+	grid-template-columns: 1fr 1fr;
+}
+
+.save-button {
+	--border-radius: 16px;
+	--box-shadow: 0 10px 22px rgba(217, 76, 135, 0.2);
+	height: 52px;
+	margin-top: 8px;
+}
+
+@media (max-width: 420px) {
+	.field-row { grid-template-columns: 1fr; }
+}
