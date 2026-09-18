@@ -1,0 +1,7 @@
+{
+  "name": "patient-crud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
